@@ -7,7 +7,7 @@ configuration:
   analytics:
     provider: plausible
   locale: en-US
-  baseUrl: idkrandomtry.github.io/mechanismdesign2026
+  baseUrl: idkrandomtry.github.io/MechanismDesign2026
   ignorePatterns:
     - private
     - templates
