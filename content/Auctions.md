@@ -1,7 +1,6 @@
-An auction is a mechanism to allocate a set of goods to a set of bidders on the basis of bids announced by the bidders. Apart from traditional setting, Auctions are now used in advertising space, search engine keywords, etc.
-
+> [!What is an Auction]
+> An auction is a mechanism to allocate a set of goods to a set of bidders on the basis of bids announced by the bidders. Apart from traditional setting, Auctions are now used in advertising space, search engine keywords, etc.
 # Terminologies
-
 **Resources:** The entities for which auctions are conducted
 **Market Structure:** The dynamics between buyers and seller. Mainly classified as:
 	*Forward Auction -* multiple buyers and 1 seller
@@ -22,13 +21,31 @@ An auction is a mechanism to allocate a set of goods to a set of bidders on the 
 **Cheat-proofness:** Bidders should not be able to manipulate the auction.
 
 # Single Indivisible Item Auction
-Following are the 4 basic type of forward auction for Single Indivisible Item Auction. The same classification is applicable for reverse auctions.
+## Abstraction
+- Seller - wishes to sell an indivisible object to 1 of $n$ buyers
+- Buyers - $\{1...n\}$
+- Buyer $i$ has a private valuation $v_i$ (valuation vector $V = \{v_1 ... v_n\}$ ). 
+- At the start of auction, the buyers report their $v_i$. However, they may strategically misreport their valuation if it results in a better expected payoff. Lets call this value $\hat{v_i}$ and the corresponding vector $\hat{V}$ . $\hat{V}$ is announced (made public) once all buyers report their type.
+- The mechanism defines 2 rules
+	- Allocation Rule: Defines the probability of agent $i$ getting the object. It is denoted by $x_i(\hat{V})$
+	- Payment Rule: Defined how much do the winning agent(s) pay. It is denoted by $p_i(\hat{V})$
+- Expected Payoff / Utility - In a Linear Environment the expected payoff is $x_i(\hat{V}) * v_i - p_i(\hat{V})$ 
+### Dominant Strategy Incentive Compatibility (DSIC)
+A mechanism is **DSIC** (or truthful) if for every bidder $i$, revealing their true valuation $b_i = v_i$ maximizes their utility, *no matter what the other bidders do*.
+$$ u_i(\hat{v_i}, V_{-i}) \ge u_i(\hat{v_i}', V_{-i}) \quad \forall \hat{v_i}', \forall V_{-i} $$
 
-## English Auction
-The Auction we all know. Bidders call out bids, starting from low price and successively raising the price. At any point the bidders know the current best bid. The winner pays the last called price.
-## Dutch Auction
-The auctioneer announces an initial price (high) and lowers t in successive rounds until a bidder accepts. The winner pays the current price.
-## First Price Sealed Bid Auction
-The bidders submit sealed bids and the highest bid is the winner and has to pay the bid price.
-## Second Price Sealed Bid Auction (Vickrey Auction)
-The allocation is exactly as above. However, the bidder has to pay the price of the second-highest bid instead of his bid.
+## Types of Auctions
+1. **First-Price Auction**
+   - Highest bidder wins, pays their bid $\hat{v_i}$.
+   - *Not DSIC*: If you bid your true value, your utility is $v_i - v_i = 0$. You are incentivized to **shade** your bid ($\hat{v_i} < v_i$) to get positive utility. Bidding strategy depends heavily on assumptions about others.
+
+- **Second-Price (Vickrey) Auction**
+	- Highest bidder wins, pays the **second-highest bid**.
+	- The Vickrey auction is DSIC.
+		- *Proof Intuition*: Your bid only determines *if* you win, not *what* you pay. Check out https://youtu.be/9qZwchMuslk?si=Wjg8qO2xS3p7Fv-h for good intuition.
+		- If you overbid ($b_i > v_i$), you risk winning against someone with a bid higher than $v_i$, forcing you to pay more than the item is worth to you (yielding negative utility). 
+		- If you underbid ($b_i < v_i$), you risk losing an item you could have won at a profitable price.
+
+The Vickrey auction also maximizes total social surplus $\sum v_i x_i$ 
+
+Check out [[Myerson's Lemma]] to find how to design optimal auctions.

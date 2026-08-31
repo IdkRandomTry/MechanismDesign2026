@@ -1,6 +1,6 @@
 - [ ] Complete ch 20 from [[Game Theory and Mechanism Design.pdf]]
 - [ ] Complete ch 21 from [[Game Theory and Mechanism Design.pdf]]
-	- [ ] Understand Myerson
+	- [x] Understand Myerson
 - [x] Understand Problem Statement of [[Optimal and DP Acquisition.pdf]]
 - [ ] Understand Mechanism of [[Optimal and DP Acquisition.pdf]]
 - [ ] Ideate Extensions of [[Optimal and DP Acquisition.pdf]]
