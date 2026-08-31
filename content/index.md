@@ -1,5 +1,5 @@
 ---
-title: Welcome to Quartz
+title: Mechanism Design Project
 ---
 Reference Book: [[Game Theory and Mechanism Design.pdf]]
 Reference YT Playlist: https://youtube.com/playlist?list=PLEGCF-WLh2RJBqmxvZ0_ie-mleCFhi2N4&si=sWe4qb2MnvGOzav4
