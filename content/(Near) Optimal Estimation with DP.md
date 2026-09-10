@@ -215,7 +215,8 @@ $$
 So the sampling-error contribution is
 $$
 O\left(\frac{1}{n}\right).
-$$If $Z\sim\operatorname{Laplace}\left(\frac{1}{\eta}\right),$ then$\operatorname{Var}(Z)=\frac{2}{\eta^2}.$ Here $\eta=\sqrt n$, so
+$$
+If $Z\sim\operatorname{Laplace}\left(\frac{1}{\eta}\right),$ then$\operatorname{Var}(Z)=\frac{2}{\eta^2}.$ Here $\eta=\sqrt n$, so
 $$
 \operatorname{Var}(Z)
 =
