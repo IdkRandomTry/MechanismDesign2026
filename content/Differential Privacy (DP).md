@@ -14,3 +14,17 @@ Alternate Definition:
 $$\left| \ln\left( \frac{\Pr[\mathcal{T}_{\mathcal{A}}(\mathbf{x}) = t]}{\Pr[\mathcal{T}_{\mathcal{A}}(\mathbf{x}') = t]} \right) \right| \le \epsilon.$$
 
 We sometimes call $\epsilon$ the *leakage*. When $\epsilon$ is small, $\ln(1+\epsilon) \approx \epsilon$, and so the definition is roughly equivalent to requiring that for all transcripts $t$, $\frac{\Pr[\mathcal{T}_{\mathcal{A}}(\mathbf{x})=t]}{\Pr[\mathcal{T}_{\mathcal{A}}(\mathbf{x}')=t]} \in 1 \pm \epsilon$.
+
+# Central Setting
+Users share their raw, non-private data directly with the platform. **The platform is trusted** to process the data and output a differentially private result. The privacy guarantee applies to the _final output_ of the estimation process with respect to each individual's data.
+
+The platform adds fine-tuned noise (such as Laplace noise) to the estimation function or output to protect individual records.
+
+The platform achieves a weakly higher utility (lower estimation error and lower cost) in the central setting because it optimizes over a larger set of estimators.
+
+# Local Setting
+Users do not trust the platform, so they privatize their data locally on their own devices before sharing it. Each user passes their data through a randomized "channel" locally, ensuring that the _individual data shared by each user_ is differentially private before it ever reaches the platform.
+
+Users add local noise (like Laplace noise) directly to their own data, and the platform combines these already-private inputs to form an unbiased estimator.
+        
+Users maintain direct control over their own privacy implementation without needing to trust the platform to deliver the promised protection.
