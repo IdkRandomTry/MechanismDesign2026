@@ -214,3 +214,34 @@ c_i\epsilon_i(c_i)
 +
 \int_{c_i}^{\infty}\epsilon_i(z)\,dz
 $$
+# Eliminate Payment Function
+The above equation lets us **eliminate the payment functions** $t_i(\cdot)$ from the platform's optimization.
+Define the **virtual privacy cost** of user $i$ as
+$$
+\psi_i(c)
+=
+c+\frac{F_i(c)}{f_i(c)}.
+$$
+
+The platform's problem becomes
+$$
+\min_{\epsilon(\cdot)}
+\mathbb{E}_c
+\left[
+(n+1)\operatorname{MSE}(c,\epsilon,\hat{\theta})
++
+\sum_{i=1}^n
+\epsilon_i(c)\psi_i(c_i)
+\right]
+-n\operatorname{var}
+$$
+
+## Intuition
+- $c_i$: user's **actual privacy sensitivity** (cost per unit privacy loss).
+- $\epsilon_i$: privacy loss assigned to user $i$.
+- $\psi_i(c_i)$: user's **virtual privacy cost**, which accounts for both their actual cost and the incentive cost of inducing truthful reporting.
+- Hence, the mechanism effectively treats the user as having cost $\psi_i(c_i)$ rather than $c_i$.
+
+The two terms in the objective represent:
+- $(n+1)\operatorname{MSE}$: cost of inaccurate estimation.
+- $\epsilon_i\psi_i(c_i)$: effective cost of giving user $i$ privacy loss.
