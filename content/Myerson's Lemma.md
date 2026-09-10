@@ -10,6 +10,7 @@ Consider a single-parameter environment.
    - *Monotonicity*: If bidder $i$ increases their bid $\hat{v}_i$ (keeping other bids $b_{-i}$ fixed), their probability/amount of allocation $x_i(\hat{v}_i, \hat{V}_{-i})$ cannot decrease.
 1. If $\mathbf{x}$ is monotone, then there is a **unique** payment rule $\mathbf{p}$ such that the mechanism is DSIC (assuming normalized payments where $p_i(0) = 0$).
 2. This unique payment rule is given by the explicit formula:
+
    $$ p_i(\hat{v}_i, \hat{V}_{-i}) = \hat{v}_i \cdot x_i(\hat{v}_i, \hat{V}_{-i}) - \int_0^{b_i} x_i(z, \hat{V}_{-i}) \, dz $$
 
 ### Intuition for the Payment Formula

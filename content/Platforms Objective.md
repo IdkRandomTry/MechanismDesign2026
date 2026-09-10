@@ -1,5 +1,4 @@
 # Central Theme
-
 [[(Near) Optimal Estimation with DP]] treats privacy loss levels $\epsilon_i$ as **given**.
 
 Here we try to design the platform which chooses how much privacy loss to impose on each user based on the user's privacy sensitivity.
