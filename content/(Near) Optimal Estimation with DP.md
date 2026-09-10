@@ -3,7 +3,7 @@ Pre-req readings: [[Differential Privacy (DP)]] ; [[Laplacian Noise and DP]]
 # Setting
 We want to estimate the mean:  $\theta(P) = \mathbb{E}_{X \sim P}[X]$ from $n$ i.i.d. samples $X_1,\ldots,X_n$.
 Each user $i$ has a heterogeneous privacy requirement $\epsilon_i$.
-
+## Central DP
 Assume, WLOG,
 $\epsilon_1 \leq \epsilon_2 \leq \cdots \leq \epsilon_n \leq 1$
 
@@ -83,18 +83,22 @@ $$
 $$
 because the data are independent and the Laplace noise has variance
 
-$$\operatorname{Var}(\operatorname{Laplace}(1/\eta))
+$$
+\operatorname{Var}(\operatorname{Laplace}(1/\eta))
 =
-\frac{2}{\eta^2}$$
+\frac{2}{\eta^2}
+$$
 The problem is therefore to choose $w_i$ and $\eta$ while satisfying $\eta w_i\leq\epsilon_i$.
 
 A straightforward choice is to make $\eta w_i=\epsilon_i$ for every user.
 Then $w_i=\frac{\epsilon_i}{\eta}$ and, since $\sum_iw_i=1$, $\eta=\sum_i\epsilon_i$.
 
 Therefore,
-$$w_i
+$$
+w_i
 =
-\frac{\epsilon_i}{\sum_j\epsilon_j}$$
+\frac{\epsilon_i}{\sum_j\epsilon_j}
+$$
 
 This gives more weight to users with larger $\epsilon_i$ i.e. gives the least privacy-constrained users very large weights. That is disastrous for the statistical error.
 
@@ -113,7 +117,8 @@ So instead of using their full $\epsilon_i$, we give them the common effective p
 $\frac{1}{\sqrt{k^*+1}}$.
 
 Thus the estimator is
-$$\hat{\theta}
+$$
+\hat{\theta}
 =
 \sum_{i=1}^{n-k^*-1}
 \frac{\epsilon_i}{\eta}X_i
@@ -121,45 +126,60 @@ $$\hat{\theta}
 \sum_{i=n-k^*}^{n}
 \frac{1/\sqrt{k^*+1}}{\eta}X_i
 +
-\operatorname{Laplace}(1/\eta)$$
+\operatorname{Laplace}(1/\eta)
+$$
 where
-$$\eta
+$$
+\eta
 =
 \sum_{i=1}^{n-k^*-1}\epsilon_i
 +
-\sqrt{k^*+1}$$For the first group, $\eta w_i=\epsilon_i$.
+\sqrt{k^*+1}
+$$For the first group, $\eta w_i=\epsilon_i$.
 For the capped group, by the definition of $k^*$.
-$$\eta w_i
+$$
+\eta w_i
 =
 \frac{1}{\sqrt{k^*+1}}
 <
-\epsilon_i$$
+\epsilon_i
+$$
 So the estimator satisfies the required heterogeneous privacy guarantees.
 ### A concrete example
 Suppose
-$$\epsilon_1=\cdots=\epsilon_{n-\sqrt n}
-=\frac{1}{\sqrt n}$$
+$$
+\epsilon_1=\cdots=\epsilon_{n-\sqrt n}
+=\frac{1}{\sqrt n}
+$$
 while
-$$\epsilon_{n-\sqrt n+1}
+$$
+\epsilon_{n-\sqrt n+1}
 =\cdots
-=\epsilon_n=1$$
+=\epsilon_n=1
+$$
 If every privacy constraint is tight, then
-$$w_i
+$$
+w_i
 =
-\frac{\epsilon_i}{\sum_j\epsilon_j}$$
+\frac{\epsilon_i}{\sum_j\epsilon_j}
+$$
 Since $\sum_j\epsilon_j\approx2\sqrt n$, the last $\sqrt n$ users receive weight approximately $\frac{1}{2\sqrt n}$ each.
-$$\sqrt n\left(\frac{1}{2\sqrt n}\right)^2
+$$
+\sqrt n\left(\frac{1}{2\sqrt n}\right)^2
 =
-\Theta\left(\frac{1}{\sqrt n}\right)$$
+\Theta\left(\frac{1}{\sqrt n}\right)
+$$
 This dominates the desired $O(1/n)$ statistical error.
 
 Instead, if we use
 $w_i=\frac1n$ for every user and choose $\eta=\sqrt n$.
-$$\eta w_i
+$$
+\eta w_i
 =
 \frac{\sqrt n}{n}
 =
-\frac1{\sqrt n}$$
+\frac1{\sqrt n}
+$$
 So **every user**, including the users with $\epsilon_i=1$, actually receives privacy loss only
 $\frac1{\sqrt n}$. For the first $n-\sqrt n$ users this uses essentially their full privacy budget. For the last $\sqrt n$ users:
 $\frac1{\sqrt n}<1$.
@@ -244,3 +264,5 @@ $$
 =
 \boxed{O(1/n)}.
 $$
+
+## Local Setting
