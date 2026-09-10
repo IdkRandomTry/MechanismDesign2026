@@ -68,17 +68,19 @@ So the linear estimator is optimal up to a logarithmic factor.
 **Proof for lower bound - yet to be done**
 
 ## Upper Bound Proof
-$$\hat{\theta}
+$$
+\hat{\theta}
 =
-\sum_i w_iX_i+\operatorname{Laplace}(1/\eta)$$
-
+\sum_i w_iX_i+\operatorname{Laplace}(1/\eta)
+$$
 Its MSE is
-$$\operatorname{MSE}
+$$
+\operatorname{MSE}
 =
 \sum_i w_i^2\operatorname{var}
 +
-\frac{2}{\eta^2}$$
-
+\frac{2}{\eta^2}
+$$
 because the data are independent and the Laplace noise has variance
 
 $$\operatorname{Var}(\operatorname{Laplace}(1/\eta))
