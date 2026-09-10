@@ -211,18 +211,11 @@ n\frac{\operatorname{var}}{n^2}
 =
 \boxed{\frac{\operatorname{var}}{n}}.
 $$
+
 So the sampling-error contribution is
 $$
 O\left(\frac{1}{n}\right).
-$$If
-$$
-Z\sim\operatorname{Laplace}\left(\frac{1}{\eta}\right),
-$$
-then
-$$
-\operatorname{Var}(Z)=\frac{2}{\eta^2}.
-$$
-Here $\eta=\sqrt n$, so
+$$If $Z\sim\operatorname{Laplace}\left(\frac{1}{\eta}\right),$ then$\operatorname{Var}(Z)=\frac{2}{\eta^2}.$ Here $\eta=\sqrt n$, so
 $$
 \operatorname{Var}(Z)
 =
@@ -230,6 +223,7 @@ $$
 =
 \boxed{\frac{2}{n}}.
 $$
+
 Thus the privacy-noise contribution is also
 $$
 O\left(\frac{1}{n}\right).
