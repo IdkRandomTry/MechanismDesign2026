@@ -134,7 +134,7 @@ $$
 =
 \sum_{i=1}^{n-k^*-1}\epsilon_i
 +
-\sqrt{k^*+1}
+\sqrt{k^\star+1}
 $$For the first group, $\eta w_i=\epsilon_i$.
 For the capped group, by the definition of $k^*$.
 $$
@@ -266,3 +266,242 @@ $$
 $$
 
 ## Local Setting
+In the **local privacy** setting, users do not give their raw data $X_i$ to the platform. Instead, each user first privatizes their own data:
+$$
+\hat X_i := C_i(X_i)
+$$
+where $C_i$ is an $\epsilon_i$-LDP channel. The platform only observes
+$$
+\hat X_1,\ldots,\hat X_n.
+$$
+This differs from the central setting in Section 2.2:
+- **Central DP:** platform sees $X_i$ and adds noise to the final estimator.
+- **Local DP:** each user adds noise before sending their data.
+An important consequence is:
+> The privacy guarantee is enforced at the user level, before the data reaches the platform.
+
+Also, an $(\epsilon_i)_{i=1}^n$-LDP algorithm is automatically $(\epsilon_i)_{i=1}^n$-central DP.
+
+## Laplace mechanism
+
+For user $i$, use
+$$
+\hat X_i
+=
+X_i+\operatorname{Laplace}\left(\frac{1}{\epsilon_i}\right).
+$$
+Since
+$$
+\operatorname{Var}(\operatorname{Laplace}(\eta))=2\eta^2,
+$$
+$$
+\operatorname{Var}(\hat X_i)
+=
+\operatorname{Var}(X_i)
++
+\frac{2}{\epsilon_i^2}.
+$$
+$$
+\boxed{
+\operatorname{Var}(\hat X_i)
+=
+\operatorname{var}+\frac{2}{\epsilon_i^2}
+}.
+$$
+### Linear estimator
+The platform forms
+$$
+\hat\theta
+=
+\sum_{i=1}^n w_i\hat X_i
+$$
+where
+$$
+\sum_{i=1}^n w_i=1.
+$$
+Substituting $\hat X_i=X_i+\operatorname{Laplace}(1/\epsilon_i)$,
+$$
+\hat\theta
+=
+\sum_{i=1}^n
+w_i
+\left(
+X_i+\operatorname{Laplace}\left(\frac{1}{\epsilon_i}\right)
+\right).
+$$
+Because the Laplace noise is zero mean,
+$$
+\mathbb E[\hat X_i]
+=
+\mathbb E[X_i]
+=
+\theta.
+$$
+Therefore,
+$$
+\mathbb E[\hat\theta]
+=
+\sum_iw_i\theta
+=
+\theta.
+$$
+So the estimator is **unbiased**.
+
+### MSE / Variance
+Since the observations are independent,
+$$
+\operatorname{MSE}(\hat\theta)
+=
+\operatorname{Var}(\hat\theta)
+=
+\sum_{i=1}^n
+w_i^2
+\left(
+\operatorname{var}
++
+\frac{2}{\epsilon_i^2}
+\right).
+$$
+$$
+\boxed{
+\operatorname{MSE}
+=
+\sum_{i=1}^n
+w_i^2
+\left(
+\operatorname{var}
++
+\frac{2}{\epsilon_i^2}
+\right)
+}
+$$
+# Theorem 2
+
+Assume
+$$
+\epsilon_i\leq1
+$$
+for all $i$, and
+
+$$
+|X|\leq\frac12
+$$
+Then there exists a universal constant $\ell_l>0$ such that
+$$
+\boxed{
+L_l(\mathcal P^*,\theta,\epsilon)
+\geq
+\ell_l
+\left(
+\frac{1}{\sum_{i=1}^n\epsilon_i^2}
+\wedge1
+\right)
+}
+$$
+and there exists an $\epsilon$-LDP linear estimator satisfying
+$$
+\boxed{
+\mathbb E[(\hat\theta-\theta)^2]
+\leq
+\frac{\ell_u}{\sum_{i=1}^n\epsilon_i^2}
+}
+\tag{13}
+$$
+for every $P\in\mathcal P^*$.
+
+Thus the minimax rate is
+$$
+\boxed{
+\Theta\left(
+\frac{1}{\sum_i\epsilon_i^2}
+\right)
+}
+$$
+**Proof of the lower bound yet to be done**
+
+**Proof of the upper bound** 
+We only need to construct an estimator with the desired MSE.
+Recall
+$$
+\operatorname{MSE}
+=
+\sum_i
+w_i^2
+\left(
+\operatorname{var}+\frac{2}{\epsilon_i^2}
+\right).
+$$
+For the upper bound, choose
+$$
+\boxed{
+w_i
+=
+\frac{\epsilon_i^2}
+{\sum_{j=1}^n\epsilon_j^2}
+}.
+$$
+These weights sum to $1$:
+
+$$
+\sum_iw_i
+=
+\frac{\sum_i\epsilon_i^2}
+{\sum_j\epsilon_j^2}
+=
+1.
+$$
+We have
+$$
+w_i^2
+=
+\frac{\epsilon_i^4}
+{\left(\sum_j\epsilon_j^2\right)^2}.
+$$
+Therefore,
+$$
+\operatorname{MSE}
+=
+\sum_i
+\frac{\epsilon_i^4}
+{\left(\sum_j\epsilon_j^2\right)^2}
+\left(
+\operatorname{var}+\frac{2}{\epsilon_i^2}
+\right).
+$$
+$$
+=
+\frac{
+\operatorname{var}\sum_i\epsilon_i^4
++
+2\sum_i\epsilon_i^2
+}
+{\left(\sum_i\epsilon_i^2\right)^2}.
+$$
+
+Since $\epsilon_i\leq1$, $\epsilon_i^4\leq\epsilon_i^2.$
+Also, because $|X|\leq1/2$, $\operatorname{var}\leq\frac14.$
+Thus,
+$$
+\operatorname{MSE}
+\leq
+\frac{
+\left(\frac14\right)\sum_i\epsilon_i^2
++
+2\sum_i\epsilon_i^2
+}
+{\left(\sum_i\epsilon_i^2\right)^2}.
+$$
+$$
+\operatorname{MSE}
+\leq
+\frac{9/4}
+{\sum_i\epsilon_i^2}.
+$$
+So for a universal constant $\ell_u$,
+$$
+\boxed{
+\operatorname{MSE}
+\leq
+\frac{\ell_u}{\sum_i\epsilon_i^2}
+}.
+$$
