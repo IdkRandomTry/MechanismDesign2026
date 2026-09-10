@@ -130,9 +130,10 @@ $$
 $$
 where
 $$
-
 \eta=\sum_{i=1}^{n-k^* - 1}\epsilon_i +\sqrt{k^* + 1}
-$$For the first group, $\eta w_i=\epsilon_i$.
+$$
+
+For the first group, $\eta w_i=\epsilon_i$.
 For the capped group, by the definition of $k^*$.
 $$
 \eta w_i
